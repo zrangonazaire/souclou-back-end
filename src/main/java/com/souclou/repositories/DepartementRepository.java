@@ -1,4 +1,4 @@
-package com.souclou.reposirories;
+package com.souclou.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

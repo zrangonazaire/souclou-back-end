@@ -3,15 +3,12 @@ package com.souclou.controllers;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasSize;
 
-import com.souclou.dtos.DepartementDto;
 import com.souclou.entities.Departement;
 import com.souclou.repositories.DepartementRepository;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import java.net.http.HttpResponse;
 import java.time.Instant;
 import java.util.List;
-import org.apache.http.client.methods.HttpHead;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +29,7 @@ public class DepartementControllerTest {
   @Autowired
   DepartementRepository departementRepository;
 
-   static MySQLContainer<?> mySQLContainer = new MySQLContainer("mysql:latest");
+  static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:latest");
 
   @DynamicPropertySource
   static void configureProperties(DynamicPropertyRegistry registry) {
@@ -43,7 +40,7 @@ public class DepartementControllerTest {
 
   @BeforeEach
   void setUp() {
-    RestAssured.baseURI = "http://localhost:" + port + "/souclou/api/v1/";
+    RestAssured.baseURI = "http://localhost:" + port + "/souclou/api/v1";
     departementRepository.deleteAll();
   }
 

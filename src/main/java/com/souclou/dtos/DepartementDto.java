@@ -7,12 +7,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
+public class DepartementDto extends AbstractDto{
 
-public class DepartementDto {
+  @NotEmpty(message = "Ce champ ne peut être vide!")
+  @NotNull(message = "Ce champ ne peut être null!")
+  private String nomDepartement;
 
-private  Long id;
-  @NotEmpty(message="Ce champ ne peut être vide!")
-  @NotNull(message="Ce champ ne peut être null!")
-private  String nomDepartement;
- private String descDepartement;
+  private String descDepartement;
 }

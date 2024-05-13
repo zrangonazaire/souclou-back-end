@@ -1,20 +1,22 @@
-package com.souclou.services;
+package com.souclou.services.impl;
 
 import com.souclou.dtos.DepartementDto;
 import com.souclou.entities.Departement;
 import com.souclou.mappers.SouclouMapper;
 import com.souclou.repositories.DepartementRepository;
+import com.souclou.services.DepartementService;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Slf4j
 @Transactional
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -70,7 +72,7 @@ public class DepartementServiceImpl implements DepartementService {
   @Override
   public List<DepartementDto> findAll() {
     return departementRepository
-      .findAll()
+      .findAll(Sort.by(Sort.Direction.ASC,"nomDepartement"))
       .stream()
       .map(x -> souclouMapper.fromDepartement(x))
       .collect(Collectors.toList());

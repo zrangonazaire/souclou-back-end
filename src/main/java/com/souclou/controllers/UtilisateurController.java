@@ -8,6 +8,8 @@ import java.util.List;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(APP_ROOT + "/utilisateur")
 @RequiredArgsConstructor
+@Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UtilisateurControler {
+
+public class UtilisateurController {
 
   final UtilisateurService utilisateurService;
 
@@ -49,5 +53,11 @@ public class UtilisateurControler {
   @GetMapping("/findAllUtilisateur")
   public ResponseEntity<List<UtilisateurDto>> findAllUtilisateur() {
     return ResponseEntity.ok(utilisateurService.findAll());
+  }
+
+  @GetMapping("/findAllUtilisateurAvecRole/{role}")
+  public ResponseEntity<List<UtilisateurDto>> findAllUtilisateurAvecRole( @PathVariable("role") String role) {
+    log.info(" THE ROLE IS NEXT DOOR IS ----- {}", role);
+    return ResponseEntity.ok(utilisateurService.listUserWithRole(role));
   }
 }

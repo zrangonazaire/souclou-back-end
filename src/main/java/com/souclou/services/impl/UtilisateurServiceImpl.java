@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Slf4j
 public class UtilisateurServiceImpl implements UtilisateurService {
 
   final RoleRepository roleRepository;
@@ -66,7 +69,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
   @Override
   public List<UtilisateurDto> findAll() {
     return utilisateurRepository
-      .findAll(Sort.by(Sort.Direction.ASC, "nomPUser"))
+      .findAll(Sort.by(Sort.Direction.ASC, "nomUser"))
       .stream()
       .map(x -> souclouMapper.fromUtilisateur(x))
       .collect(Collectors.toList());
@@ -74,10 +77,21 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
   @Override
   public UtilisateurDto saveOrUpdateUserRole(UtilisateurDto dto) {
-    Role role = roleRepository.findByRoleName(dto.getRoleName());
+  //  Role role = roleRepository.findByRoleName(dto.getRoleName());
 
     throw new UnsupportedOperationException(
       "Unimplemented method 'saveOrUpdateUserRole'"
     );
+  }
+
+  @Override
+  public List<UtilisateurDto> listUserWithRole(String role) {
+  log.info("role is  {}",role);
+    return utilisateurRepository
+      .findAll(Sort.by(Sort.Direction.ASC, "roleName"))
+      .stream()
+      .filter(x->x.getUrole().getRoleName().contains(role))
+      .map(x -> souclouMapper.fromUtilisateur(x))
+      .collect(Collectors.toList());
   }
 }

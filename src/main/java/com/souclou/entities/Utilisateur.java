@@ -16,7 +16,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Utilisateur extends AbstractEntity {
-  String nomPUser;
+  String nomUser;
   String prenomPrUser;
   String telMobileUser;
   String celUser;

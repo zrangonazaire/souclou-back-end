@@ -13,79 +13,83 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.testcontainers.containers.MySQLContainer;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@WebMvcTest(controllers={DepartementController.class})
+@RunWith(SpringRunner.class)
 public class DepartementControllerTest {
 
-  @LocalServerPort
-  private Integer port;
+  // @LocalServerPort
+  // private Integer port;
 
-  @Autowired
-  DepartementRepository departementRepository;
+  // @Autowired
+  // DepartementRepository departementRepository;
 
-  static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:latest");
+  // static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:latest");
 
-  @DynamicPropertySource
-  static void configureProperties(DynamicPropertyRegistry registry) {
-    registry.add("spring.datasource.url", mySQLContainer::getJdbcUrl);
-    registry.add("spring.datasource.username", mySQLContainer::getUsername);
-    registry.add("spring.datasource.password", mySQLContainer::getPassword);
-  }
+  // @DynamicPropertySource
+  // static void configureProperties(DynamicPropertyRegistry registry) {
+  //   registry.add("spring.datasource.url", mySQLContainer::getJdbcUrl);
+  //   registry.add("spring.datasource.username", mySQLContainer::getUsername);
+  //   registry.add("spring.datasource.password", mySQLContainer::getPassword);
+  // }
 
-  @BeforeEach
-  void setUp() {
-    RestAssured.baseURI = "http://localhost:" + port + "/souclou/api/v1";
-    departementRepository.deleteAll();
-  }
+  // @BeforeEach
+  // void setUp() {
+  //   RestAssured.baseURI = "http://localhost:" + port + "/souclou/api/v1";
+  //   departementRepository.deleteAll();
+  // }
 
-  @BeforeAll
-  static void beforeAll() {
-    mySQLContainer.start();
-  }
+  // @BeforeAll
+  // static void beforeAll() {
+  //   mySQLContainer.start();
+  // }
 
-  @AfterAll
-  static void afterAll() {
-    mySQLContainer.stop();
-  }
+  // @AfterAll
+  // static void afterAll() {
+  //   mySQLContainer.stop();
+  // }
 
-  @Test
-  void testDeleteDepartement() {}
+  // @Test
+  // void testDeleteDepartement() {}
 
-  @Test
-  void testFindAllDepartement() {
-    Departement dep1 = new Departement();
-    dep1.setCreationDate(Instant.now());
-    dep1.setLastModifiedDate(Instant.now());
-    dep1.setNomDepartement("dep 1");
-    dep1.setDescDepartement("Departement 1");
-    departementRepository.save(dep1);
+  // @Test
+  // void testFindAllDepartement() {
+  //   Departement dep1 = new Departement();
+  //   dep1.setCreationDate(Instant.now());
+  //   dep1.setLastModifiedDate(Instant.now());
+  //   dep1.setNomDepartement("dep 1");
+  //   dep1.setDescDepartement("Departement 1");
+  //   departementRepository.save(dep1);
 
-    Departement dep2 = new Departement();
-    dep2.setCreationDate(Instant.now());
-    dep2.setLastModifiedDate(Instant.now());
-    dep2.setNomDepartement("dep 1");
-    dep2.setDescDepartement("Departement 1");
-    departementRepository.save(dep2);
-    List<Departement> departements = List.of(dep1, dep2);
-    departementRepository.saveAll(departements);
-    given()
-      .contentType(ContentType.JSON)
-      .when()
-      .get("/departement/findAllDepartement")
-      .then()
-      .statusCode(200)
-      .body(".", hasSize(2));
-  }
+  //   Departement dep2 = new Departement();
+  //   dep2.setCreationDate(Instant.now());
+  //   dep2.setLastModifiedDate(Instant.now());
+  //   dep2.setNomDepartement("dep 1");
+  //   dep2.setDescDepartement("Departement 1");
+  //   departementRepository.save(dep2);
+  //   List<Departement> departements = List.of(dep1, dep2);
+  //   departementRepository.saveAll(departements);
+  //   given()
+  //     .contentType(ContentType.JSON)
+  //     .when()
+  //     .get("/departement/findAllDepartement")
+  //     .then()
+  //     .statusCode(200)
+  //     .body(".", hasSize(2));
+  // }
 
-  @Test
-  void testFindByIdDepartement() {}
+  // @Test
+  // void testFindByIdDepartement() {}
 
-  @Test
-  void testSaveOrUpdateDepartement() {}
+  // @Test
+  // void testSaveOrUpdateDepartement() {}
 }

@@ -1,9 +1,9 @@
 {
-    "id": 0,
+    "id": 1,
     "idCreateur": 0,
     "creationDate": "2024-05-07T14:22:29.626Z",
     "lastModifiedDate": "2024-05-07T14:22:29.626Z",
-    "nomPUser": "ZRANGO",
+    "nomPUser": "ZRANGUS",
     "prenomPrUser": "GONQUET ASTAIRE NAZAIRE",
     "telMobileUser": "0708771317",
     "celUser": "0708771317",
@@ -11,5 +11,14 @@
     "genreUser": "monsieur",
     "motDePasse": "1234",
     "dateDeNaissUser": "2024-05-07",
-    "mailUser": "astairenazaire@gmail.com"
+    "mailUser": "astairenazaire@gmail.com",
+    "urole":{
+      "id": 1,
+      "idCreateur": 0,
+      "creationDate": "2024-05-09T17:40:49.998Z",
+      "lastModifiedDate": "2024-05-09T17:40:49.998Z",
+      "roleName": "PROFESSEUR",
+      "roleDescription": "ROLE PROFESSEUR"
+    }
+
   }

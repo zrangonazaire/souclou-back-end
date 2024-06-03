@@ -1,5 +1,5 @@
 {
-    "id": 17,
+    "id": null,
     "idCreateur": 0,
     "creationDate": "2024-05-07T14:22:29.626Z",
     "lastModifiedDate": "2024-05-07T14:22:29.626Z",
@@ -11,5 +11,14 @@
     "genreUser": "monsieur",
     "motDePasse": "1234",
     "dateDeNaissUser": "2024-05-07",
-    "mailUser": "astairenazaire@gmail.com"
+    "mailUser": "astairenazaire@gmail.com",
+    "urole":{
+      "id": 1,
+      "idCreateur": 0,
+      "creationDate": "2024-05-09T17:40:49.998Z",
+      "lastModifiedDate": "2024-05-09T17:40:49.998Z",
+      "roleName": "PROFESSEUR",
+      "roleDescription": "ROLE PROFESSEUR"
+    }
+
   }

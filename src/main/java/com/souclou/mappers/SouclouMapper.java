@@ -1,14 +1,17 @@
 package com.souclou.mappers;
 
 import com.souclou.dtos.DepartementDto;
+import com.souclou.dtos.EleveDto;
+import com.souclou.dtos.NationaliteDto;
 import com.souclou.dtos.RoleDto;
 import com.souclou.dtos.UtilisateurDto;
 import com.souclou.entities.Departement;
+import com.souclou.entities.Eleve;
+import com.souclou.entities.Nationalite;
 import com.souclou.entities.Role;
 import com.souclou.entities.Utilisateur;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,5 +58,28 @@ public class SouclouMapper {
     BeanUtils.copyProperties(dto, roleDto);
 
     return roleDto;
+  }
+
+  public NationaliteDto fromNationalite(Nationalite dto) {
+    NationaliteDto nationaliteDto = new NationaliteDto();
+    BeanUtils.copyProperties(dto, nationaliteDto);
+    return nationaliteDto;
+  }
+
+  public Nationalite toNationalite(NationaliteDto dto) {
+    Nationalite nationalite = new Nationalite();
+    BeanUtils.copyProperties(dto, nationalite);
+    return nationalite;
+  }
+  public Eleve toEleve(EleveDto dto){
+    Eleve eleve=new Eleve();
+    BeanUtils.copyProperties(dto, eleve);    
+    return eleve;
+  }
+  public EleveDto fromEleve(Eleve dto){
+    EleveDto eleveDto=new EleveDto();
+    BeanUtils.copyProperties(dto, eleveDto);
+    eleveDto.setIdNationalite(dto.getNationEleve().getId());
+    return eleveDto;
   }
 }

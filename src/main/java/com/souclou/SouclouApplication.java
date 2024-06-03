@@ -1,6 +1,8 @@
 package com.souclou;
 
+import com.souclou.entities.Nationalite;
 import com.souclou.entities.Role;
+import com.souclou.repositories.NationaliteRepository;
 import com.souclou.repositories.RoleRepository;
 import java.time.Instant;
 import java.util.Arrays;
@@ -17,7 +19,10 @@ public class SouclouApplication {
   }
 
   // @Bean
-  // public CommandLineRunner initData(RoleRepository roleRepository) {
+  // public CommandLineRunner initData(
+  //   RoleRepository roleRepository,
+  //   NationaliteRepository nationaliteRepository
+  // ) {
   //   return args -> {
   //     Long nmbrH = roleRepository.count();
   //     if (nmbrH <= 0) {
@@ -48,6 +53,14 @@ public class SouclouApplication {
   //       roleDto2.setRoleDescription("Role Administrateur");
   //       roleDto2.setRoleName("ADMINISTRATEUR");
   //       roleRepository.saveAll(Arrays.asList(roleDto, roleDto1, roleDto2));
+  //     }
+  //     Long nbrNat=nationaliteRepository.count();
+  //     if (nbrNat<=0) {
+  //       Nationalite nationalite=new Nationalite();
+  //       nationalite.setCreationDate(Instant.now());
+  //       nationalite.setDescNat("IVOIRIEN");
+  //       nationalite.setLastModifiedDate(Instant.now());
+  //       nationaliteRepository.save(nationalite);
   //     }
   //   };
   // }

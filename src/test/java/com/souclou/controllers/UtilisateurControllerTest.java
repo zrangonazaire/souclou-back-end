@@ -2,7 +2,6 @@ package com.souclou.controllers;
 
 import static com.souclou.constants.SecurityConstants.APP_ROOT;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -22,7 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,7 +39,7 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = { UtilisateurController.class })
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Slf4j
+
 public class UtilisateurControllerTest {
 
   List<UtilisateurDto> utilisateurDtos;
@@ -57,10 +55,6 @@ public class UtilisateurControllerTest {
 
   @MockBean
   private UtilisateurService utilisateurService;
-
-  // @MockBean
-  // private RoleService roleService;
-
   @Autowired
   private MockMvc mockMvc;
 

@@ -7,8 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.souclou.dtos.EleveDto;
-import com.souclou.services.EleveService;
+import com.souclou.dtos.AnneeDto;
+import com.souclou.services.AnneeService;
 import java.util.Arrays;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -28,21 +28,21 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = { EleveController.class })
+@WebMvcTest(controllers = { AnneeController.class })
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class EleveControllerTest {
+public class AnneeControllerTest {
 
   @Autowired
   MockMvc mockMvc;
 
   @MockBean
-  EleveService eleveService;
-
-  @Autowired
-  ObjectMapper objectMapper;
+  AnneeService anneeService;
 
   @Autowired
   private WebApplicationContext applicationContext;
+
+  @Autowired
+  ObjectMapper objectMapper;
 
   @BeforeEach
   public void setUp() {
@@ -55,21 +55,21 @@ public class EleveControllerTest {
   }
 
   @Test
-  void testDeleteEleve() throws Exception {
+  void testDeleteAnnee() throws Exception {
     mockMvc
-      .perform(MockMvcRequestBuilders.delete(APP_ROOT + "/eleve/deleteEleve/1"))
+      .perform(MockMvcRequestBuilders.delete(APP_ROOT + "/annee/deleteAnnee/1"))
       .andExpect(status().isOk())
       .andDo(print());
   }
 
   @Test
-  void testFindAllEleve() throws Exception {
-    when(eleveService.findAll())
-      .thenReturn(Arrays.asList(new EleveDto(), new EleveDto()));
+  void testFindAllAnnee() throws Exception {
+    when(anneeService.findAll())
+      .thenReturn(Arrays.asList(new AnneeDto(), new AnneeDto()));
     mockMvc
       .perform(
         MockMvcRequestBuilders
-          .get(APP_ROOT + "/eleve/findAllEleve")
+          .get(APP_ROOT + "/annee/findAllAnnee")
           .contentType(MediaType.APPLICATION_JSON)
       )
       .andExpect(status().isOk())
@@ -78,14 +78,14 @@ public class EleveControllerTest {
   }
 
   @Test
-  void testFindByIdEleve() throws Exception {
-    EleveDto eleveDto = new EleveDto();
-    eleveDto.setId(1L);
-    when(eleveService.findById(1L)).thenReturn(eleveDto);
+  void testFindByIdAnnee() throws Exception {
+    AnneeDto anneeDto = new AnneeDto();
+    anneeDto.setId(1L);
+    when(anneeService.findById(1L)).thenReturn(anneeDto);
     mockMvc
       .perform(
         MockMvcRequestBuilders
-          .get(APP_ROOT + "/eleve//findByIdEleve/1")
+          .get(APP_ROOT + "/annee//findByIdAnnee/1")
           .contentType(MediaType.APPLICATION_JSON)
       )
       .andExpect(status().isOk())
@@ -94,40 +94,40 @@ public class EleveControllerTest {
   }
 
   @Test
-  void testCreateEleve() throws Exception {
-    EleveDto eleveDto = new EleveDto();
-    eleveDto.setNomPUser("koffi franck");
-    when(eleveService.saveOrUpdate(any(EleveDto.class))).thenReturn(eleveDto);
+  void testSaveAnnee() throws Exception {
+    AnneeDto anneeDto = new AnneeDto();
+    anneeDto.setAnneeScol("2024/2025");
+    when(anneeService.saveOrUpdate(any(AnneeDto.class))).thenReturn(anneeDto);
     mockMvc
       .perform(
         MockMvcRequestBuilders
-          .post(APP_ROOT + "/eleve/saveOrUpdateEleve")
+          .post(APP_ROOT + "/annee/saveOrUpdateAnnee")
           .contentType(MediaType.APPLICATION_JSON)
-          .content(objectMapper.writeValueAsString(eleveDto))
+          .content(objectMapper.writeValueAsString(anneeDto))
       )
       .andExpect(status().isOk())
-      .andExpect(jsonPath("$.nomPUser").exists())
-      .andExpect(jsonPath("$.nomPUser").value("koffi franck"))
+      .andExpect(jsonPath("$.anneeScol").exists())
+      .andExpect(jsonPath("$.anneeScol").value("2024/2025"))
       .andDo(print());
   }
 
   @Test
-  void testUpdateEleve() throws Exception {
-    EleveDto eleveDto = new EleveDto();
-    eleveDto.setId(1L);
-    eleveDto.setNomPUser("koffi franck");
-    when(eleveService.findById(1L)).thenReturn(new EleveDto());
-    when(eleveService.saveOrUpdate(any(EleveDto.class))).thenReturn(eleveDto);
+  void testUpdateAnnee() throws Exception {
+    AnneeDto anneeDto = new AnneeDto();
+    anneeDto.setId(1L);
+    anneeDto.setAnneeScol("2023/2024");
+    when(anneeService.findById(1L)).thenReturn(new AnneeDto());
+    when(anneeService.saveOrUpdate(any(AnneeDto.class))).thenReturn(anneeDto);
     mockMvc
       .perform(
         MockMvcRequestBuilders
-          .post(APP_ROOT + "/eleve/saveOrUpdateEleve")
+          .post(APP_ROOT + "/annee/saveOrUpdateAnnee")
           .contentType(MediaType.APPLICATION_JSON)
-          .content(objectMapper.writeValueAsString(eleveDto))
+          .content(objectMapper.writeValueAsString(anneeDto))
       )
       .andExpect(status().isOk())
-      .andExpect(jsonPath("$.nomPUser").exists())
-      .andExpect(jsonPath("$.nomPUser").value("koffi franck"))
+      .andExpect(jsonPath("$.anneeScol").exists())
+      .andExpect(jsonPath("$.anneeScol").value("2023/2024"))
       .andDo(print());
   }
 }

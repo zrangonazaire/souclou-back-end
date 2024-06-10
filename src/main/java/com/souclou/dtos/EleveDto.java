@@ -1,6 +1,5 @@
 package com.souclou.dtos;
 
-import com.souclou.entities.Nationalite;
 import java.time.LocalDate;
 import lombok.AccessLevel;
 import lombok.Getter;
